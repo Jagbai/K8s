@@ -1,0 +1,35 @@
+image:
+  repository: docker.redpanda.com/redpandadata/redpanda
+  tag: v25.1.12
+
+podTemplate:
+  spec:
+    imagePullSecrets:
+      - name: redpanda-regcred
+
+statefulset:
+  replicas: 1
+  initContainers:
+    setDataDirOwnership:
+      enabled: true
+
+tls:
+  enabled: false
+
+rbac:
+  enabled: true
+
+listeners:
+  kafka:
+    port: 9093
+    external:
+      default:
+        port: 9092
+        advertisedPorts:
+          - 31092
+        tls:
+          enabled: false
+        nodePort: 31092   # must be 30000–32767
+
+
+

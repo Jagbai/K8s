@@ -1,0 +1,32 @@
+adminUser: admin
+adminPassword: admin
+
+service:
+  type: NodePort
+  nodePort: 30000
+
+persistence:
+  enabled: true
+  size: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: "standard"
+  existingClaim: ""
+
+dashboardsProvider:
+  enabled: false
+
+sidecar:
+  dashboards:
+    enabled: false
+  datasources:
+    enabled: false
+
+# Disable ingress, test datasources, LDAP, etc.
+ingress:
+  enabled: false
+
+# Keep container small
+image:
+  repository: grafana/grafana
+  tag: 11.2.0

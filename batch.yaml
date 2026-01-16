@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: batch
+  namespace: monitoring
+data:
+  docker_targets.yml: |
+    - labels:
+        os: linux
+        runtime: vm
+      targets:
+        - host.docker.internal:9100
+
+    - labels:
+        os: windows
+        runtime: container
+      targets:
+        - host.docker.internal:8080
+
