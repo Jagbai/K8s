@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: flash-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Jagbai/K8s.git
+    targetRevision: HEAD
+    path: flash-app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: flash-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
